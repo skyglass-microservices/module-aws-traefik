@@ -11,14 +11,9 @@ provider "helm" {
   }
 }
 
-/*
 provider "aws" {
   region = var.aws_region
 }
-*/
-
-# helm repo add traefik https://helm.traefik.io/traefik
-# helm install traefik traefik/traefik
 
 resource "helm_release" "traefik-ingress" {
   name       = "ms-traefik-ingress"
@@ -31,11 +26,4 @@ resource "helm_release" "traefik-ingress" {
       externalTrafficPolicy: Local
   EOF
   ]
-
-  # Don't install until the EKS cluser nodegroup has started
-  # depends_on = [kubernetes_namespace.argo-ns]
 }
-
-#resource "aws_api_gateway_vpc_link" "ingress-link" {
-#  name = "${var.env_name}-ingress-link"
-#}
